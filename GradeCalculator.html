@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-lg space-y-6">
+        <h1 class="text-3xl font-bold text-center text-gray-800">Grade Calculator</h1>
+        <p class="text-center text-gray-600">Enter a score to see the corresponding letter grade.</p>
+        
+        <div class="flex flex-col items-center space-y-4">
+            <input type="number" id="scoreInput" placeholder="Enter score (0-100)" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-blue-500 transition-colors">
+            <button onclick="showGrade()" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors">
+                Calculate Grade
+            </button>
+        </div>
+        
+        <div id="result" class="text-center p-4 rounded-lg border border-dashed border-gray-400 bg-gray-50 hidden">
+            <p class="text-xl font-medium text-gray-700">The grade is: <span id="gradeResult" class="font-bold text-blue-600 text-2xl"></span></p>
+        </div>
+
+        <div id="consoleLogs" class="bg-gray-100 p-4 rounded-lg text-sm overflow-x-auto">
+            <h2 class="font-bold text-gray-700 mb-2">Console Logs:</h2>
+            <pre id="logOutput" class="text-gray-600 font-mono"></pre>
+        </div>
+
+    </div>
+
+    <script>
+        // Simple function to get a letter grade from a score.
+        const getGrade = (score) => {
+            if (score >= 90) return 'A';
+            if (score >= 80) return 'B';
+            if (score >= 70) return 'C';
+            if (score >= 60) return 'D';
+            return 'F';
+        };
+
+        // --- Let's run a few tests and log them out ---
+        const testScores = () => {
+            const scores = [95, 82, 75, 63, 58, 100, 0];
+            const logBox = document.getElementById('logOutput');
+            logBox.textContent = ''; // clear any old logs
+
+            scores.forEach(s => {
+                const g = getGrade(s);
+                const msg = `Score: ${s}, Grade: ${g}`;
+                console.log(msg);
+                logBox.textContent += msg + '\n';
+            });
+        };
+        
+        // Function to update the UI with the calculated grade.
+        const showGrade = () => {
+            const input = document.getElementById('scoreInput');
+            const resultBox = document.getElementById('result');
+            const gradeSpan = document.getElementById('gradeResult');
+            const score = parseInt(input.value, 10);
+
+            if (isNaN(score) || score < 0 || score > 100) {
+                gradeSpan.textContent = 'Invalid Score';
+                gradeSpan.classList.add('text-red-500');
+                gradeSpan.classList.remove('text-blue-600');
+            } else {
+                const grade = getGrade(score);
+                gradeSpan.textContent = grade;
+                gradeSpan.classList.add('text-blue-600');
+                gradeSpan.classList.remove('text-red-500');
+            }
+            resultBox.classList.remove('hidden');
+        };
+
+        // Fire off the tests when the page loads.
+        window.onload = testScores;
+    </script>
+</body>
+</html>

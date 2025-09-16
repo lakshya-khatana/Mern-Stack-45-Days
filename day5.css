@@ -1,0 +1,91 @@
+/* Existing styles from Day 4... */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333; /* Default text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    transition: background-color 0.5s, color 0.5s; /* Add a smooth transition */
+}
+
+/* New CSS for the dark mode class */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: background-color 0.5s, box-shadow 0.5s;
+}
+
+/* Adjust container styles for dark mode */
+body.dark-mode .container {
+    background-color: #1f1f1f;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+h1 {
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    transition: color 0.5s, border-color 0.5s;
+}
+
+body.dark-mode h1 {
+    color: #e0e0e0;
+    border-color: #6a1b9a; /* A different color for a better contrast */
+}
+
+/* Skill list item adjustments for dark mode */
+.skill-item {
+    background-color: #e9ecef;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.5s, transform 0.2s;
+}
+
+body.dark-mode .skill-item {
+    background-color: #333;
+    color: #e0e0e0;
+}
+
+.skill-proficiency {
+    font-style: italic;
+    color: #007bff;
+    transition: color 0.5s;
+}
+
+body.dark-mode .skill-proficiency {
+    color: #90caf9;
+}
+
+/* Basic button styling */
+#theme-toggle {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+#theme-toggle:hover {
+    background-color: #0056b3;
+}

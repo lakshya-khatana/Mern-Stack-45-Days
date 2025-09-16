@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakshyadeep Khatana - Frontend Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.5s ease;
+        }
+
+        /* Dark Theme Styles */
+        body.dark {
+            background: #0d121c;
+            color: #d1d5db;
+        }
+        .card-inner.dark {
+            background-color: #1a202c; /* Darker card background */
+            border-color: #2d3748;
+        }
+        .card-inner.dark h1 {
+            color: #e2e8f0;
+        }
+        .card-inner.dark .text-purple-400 {
+            color: #a78bfa; /* Lighter purple for dark mode */
+        }
+        .card-inner.dark .text-gray-400 {
+            color: #a0aec0;
+        }
+        .card-inner.dark .social-icon {
+            color: #a0aec0;
+        }
+        .card-inner.dark .social-icon:hover {
+            color: #e2e8f0;
+        }
+        .card-inner.dark .border-purple-500 {
+            border-color: #8b5cf6;
+        }
+
+        /* Light Theme Styles */
+        body.light {
+            background: #f0f4f8; /* Light background */
+            color: #374151;
+        }
+        .card-inner.light {
+            background-color: #ffffff; /* White card background */
+            border-color: #e5e7eb;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .card-inner.light h1 {
+            color: #1f2937;
+        }
+        .card-inner.light .text-purple-400 {
+            color: #8b5cf6; /* Original purple for light mode */
+        }
+        .card-inner.light .text-gray-400 {
+            color: #6b7280;
+        }
+        .card-inner.light .social-icon {
+            color: #6b7280;
+        }
+        .card-inner.light .social-icon:hover {
+            color: #1f2937;
+        }
+        .card-inner.light .border-purple-500 {
+            border-color: #8b5cf6;
+        }
+
+        .card-container {
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes glow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glowing-border {
+            position: absolute;
+            inset: -4px;
+            border-radius: 20px;
+            background: linear-gradient(to right, #6d28d9, #c026d3, #9333ea);
+            background-size: 200% 200%;
+            z-index: -1;
+            filter: blur(8px);
+            transition: all 0.5s ease-in-out;
+            opacity: 0.5;
+            animation: glow 8s ease infinite;
+        }
+
+        .card-container:hover .glowing-border {
+            opacity: 1;
+            filter: blur(12px);
+        }
+
+        .social-icon {
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-4px) scale(1.1);
+            color: #fff; /* White on hover for dark mode */
+        }
+        body.light .social-icon:hover {
+            color: #6d28d9; /* Purple on hover for light mode */
+        }
+
+
+        .btn-primary {
+            background: linear-gradient(45deg, #6d28d9, #9333ea);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 4px 15px rgba(109, 40, 217, 0.4);
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(109, 40, 217, 0.6);
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            padding: 0.75rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: #d1d5db;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        #theme-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        body.light #theme-toggle {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: #4b5563;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        body.light #theme-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive adjustments for buttons */
+        @media (max-width: 768px) {
+            .btn-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .btn-primary {
+                width: 100%; /* Full width on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-sun hidden"></i>
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="card-container transform transition-transform duration-300 hover:scale-105">
+        <div class="glowing-border"></div>
+        <div class="card-inner bg-gray-900 p-8 rounded-2xl shadow-2xl max-w-lg w-full flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-8 border border-gray-700">
+            
+            <div class="flex-shrink-0">
+                <img src="LAKSHYA.jpg"  class="w-32 h-32 rounded-full object-cover border-4 border-gray-6"
+                     alt="Lakshyadeep Khatana - Profile Picture"
+                     class="rounded-full w-24 h-24 object-cover border-4 border-purple-500 shadow-lg">
+            </div>
+
+            <div class="text-center md:text-left flex-grow">
+                <h1 class="text-3xl font-bold text-gray-100">Lakshyadeep Khatana</h1>
+                <p class="text-lg text-purple-400 font-medium mt-1">Frontend Developer</p>
+                <p class="text-sm text-gray-400 mt-3 italic max-w-xs mx-auto md:mx-0">
+                    A passionate Frontend Developer specializing in creating intuitive and responsive user experiences with a focus on modern web technologies.
+                </p>
+                
+                <div class="flex justify-center md:justify-start space-x-5 mt-5">
+                    <a href="https://www.linkedin.com/in/lakshya-khatana-673186277" class="text-gray-400 social-icon" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin fa-lg"></i>
+                    </a>
+                    <a href="https://github.com/lakshya-khatana" class="text-gray-400 social-icon" target="_blank" aria-label="GitHub">
+                        <i class="fab fa-github fa-lg"></i>
+                    </a>
+                    <a href="https://instagram.com/lakshya_khatana" class="text-gray-400 social-icon" target="_blank" aria-label="Instagram">
+                        <i class="fab fa-instagram fa-lg"></i>
+                    </a>
+                    <a href="mailto:lakshyakhatana83@gmail.com" class="text-gray-400 social-icon" aria-label="Email">
+                        <i class="fas fa-envelope fa-lg"></i>
+                    </a>
+                </div>
+
+                <div class="mt-6 flex flex-col sm:flex-row justify-center md:justify-start gap-4 btn-group">
+                    <a href="Lakshyadeep-Khatana-FlowCV-Resume-20250908.pdf" target="_blank" class="btn-primary inline-flex items-center justify-center">
+                        <i class="fas fa-file-pdf mr-2"></i>Check Resume
+                    </a>
+                    <a href="mailto:lakshyakhatana83@gmail.com" class="btn-primary inline-flex items-center justify-center !bg-purple-600 !hover:bg-purple-700">
+                        <i class="fas fa-envelope mr-2"></i>Email Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const sunIcon = themeToggle.querySelector('.fa-sun');
+        const moonIcon = themeToggle.querySelector('.fa-moon');
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                body.classList.add('dark');
+                body.classList.remove('light');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.add('light');
+                body.classList.remove('dark');
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Check for saved theme preference or default to dark
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            setTheme('dark'); // Default to dark theme
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+    </script>
+</body>
+</html>
